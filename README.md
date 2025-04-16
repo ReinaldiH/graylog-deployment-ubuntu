@@ -110,35 +110,79 @@ mongod --version
 
 Install dependencies:
 
+Install OpenJDK, we need to install Java :
+
 ```bash
-apt install apt-transport-https openjdk-11-jre -y
+apt install openjdk-17-jre-headless -y
 ```
+<img width="650" alt="Image" src="https://github.com/user-attachments/assets/8f9cd2a4-e543-4c98-8861-4e0abb1db07d" />
 
-Add Elasticsearch GPG key and repository:
+We can confirm the version of Java
 
 ```bash
-wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
+java -version
+```
+<img width="570" alt="Image" src="https://github.com/user-attachments/assets/98323be7-c4d4-44b6-ba2c-82b6e0b8bb3a" />
+
+
+After that, we can download and add the Elasticsearch GPG Key and repository:
+
+```bash
+curl -fsSL https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
 echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | tee -a /etc/apt/sources.list.d/elastic-7.x.list
 ```
+<img width="650" alt="Image" src="https://github.com/user-attachments/assets/0d531ff5-38b3-40a6-bfc5-bfb20090ac82" />
+
+<img width="654" alt="Image" src="https://github.com/user-attachments/assets/43878ece-ee80-4495-9739-b3108ef3861c" />
+
 
 Update and install:
 
 ```bash
-apt update && apt install elasticsearch -y
+apt update
+apt install elasticsearch -y
 ```
+<img width="646" alt="Image" src="https://github.com/user-attachments/assets/fc7ab99c-206d-4fc3-a703-f6b9104f31ce" />
 
-Start and enable Elasticsearch:
+<img width="651" alt="Image" src="https://github.com/user-attachments/assets/e63c6457-94b6-4790-8515-24dc55c40ceb" />
+
+After installing Elasticsearch, you'll need to adjust a few settings in its main configuration file. Open the file using any text editor you're comfortable with — in this example, we'll use nano from the command line.
 
 ```bash
+nano /etc/elasticsearch/elasticsearch.yml
+```
+<img width="613" alt="Image" src="https://github.com/user-attachments/assets/1bfd4a81-5a2f-4b93-bbcd-dbccdb776be2" />
+
+Specify your desired cluster.name, and immediately after, append action.auto_create_index: false to prevent Elasticsearch from creating indices on its own.
+
+```bash
+cluster.name: graylog
+action.auto_create_index: false
+```
+<img width="637" alt="Image" src="https://github.com/user-attachments/assets/4f3d8d14-011e-43e3-a599-24dfafb43a08" />
+
+Reload systemd for the change to apply, Start and enabling Elasticsearch service to start on boot.
+
+```bash
+systemctl daemon-reload
 systemctl start elasticsearch
 systemctl enable elasticsearch
 ```
+<img width="650" alt="Image" src="https://github.com/user-attachments/assets/e69b06ff-e16b-4cff-99d1-85d094349994" />
+
+Verify the status of Elasticsearch
+
+```bash
+systemctl status elasticsearch
+```
+<img width="654" alt="Image" src="https://github.com/user-attachments/assets/ae55db0f-c2a3-4308-b9c2-9a40700a5820" />
 
 Verify Elasticsearch:
 
 ```bash
 curl -X GET "localhost:9200/"
 ```
+<img width="545" alt="Image" src="https://github.com/user-attachments/assets/77155a95-6716-4060-b291-731e9c9ef932" />
 
 ---
 
