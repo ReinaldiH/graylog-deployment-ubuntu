@@ -30,8 +30,15 @@ sudo su
 First, update the system to ensure all packages are current:
 
 ```bash
-apt update && apt upgrade -y
+apt update
 ```
+
+```bash
+apt install curl wget apt-transport-https
+```
+<img width="652" alt="Image" src="https://github.com/user-attachments/assets/5b8a25a2-965e-48aa-8914-a388fc71e92c" />
+
+<img width="654" alt="Image" src="https://github.com/user-attachments/assets/295c1928-feed-4d17-ad6a-1b920e0e8260" />
 
 ---
 
@@ -48,41 +55,54 @@ Verify the Java version:
 ```bash
 java -version
 ```
+<img width="650" alt="Image" src="https://github.com/user-attachments/assets/bb6f9278-d20a-454e-8eb8-93bad0fb7e6e" />
+
+<img width="570" alt="Image" src="https://github.com/user-attachments/assets/c53f6c56-859c-453e-a65a-6aac322b8a79" />
 
 ---
 
 ## Step 3: Install MongoDB
+
+Add the MongoDB GPG signing key:
+
+```bash
+curl -fsSL https://pgp.mongodb.com/server-6.0.asc | \
+sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/mongodb-server-6.0.gpg
+```
+<img width="654" alt="Image" src="https://github.com/user-attachments/assets/9a93e839-ee6b-4298-8568-764d5211bd85" />
 
 Add the MongoDB repository:
 
 ```bash
 echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-4.4.list
 ```
+<img width="651" alt="Image" src="https://github.com/user-attachments/assets/a76c69c5-bc1b-45ff-9a52-9503c894899f" />
 
-Import the MongoDB GPG key:
-
-```bash
-wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | apt-key add -
-```
 
 Update and install MongoDB:
 
 ```bash
 apt update && apt install mongodb-org -y
 ```
+<img width="648" alt="Image" src="https://github.com/user-attachments/assets/84105f1d-da0c-40cb-b5ef-d5fef51a6181" />
 
-Start and enable MongoDB:
+<img width="651" alt="Image" src="https://github.com/user-attachments/assets/e961faf5-4753-4d89-ab2c-3e305b6600ff" />
+
+Start, enable MongoDB and Check MongoDB status:
 
 ```bash
 systemctl start mongod
 systemctl enable mongod
-```
-
-Check MongoDB status:
-
-```bash
 systemctl status mongod
 ```
+<img width="656" alt="Image" src="https://github.com/user-attachments/assets/a0f3ea68-b5d9-4dcc-bafc-db5a09f4901f" />
+
+To verify the version installed
+
+```bash
+mongod --version
+```
+<img width="500" alt="Image" src="https://github.com/user-attachments/assets/ef2a2d33-f9d3-49af-ac2d-64f2fc45f305" />
 
 ---
 
