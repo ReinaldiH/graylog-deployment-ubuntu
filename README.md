@@ -108,24 +108,7 @@ mongod --version
 
 ## Step 4: Install Elasticsearch
 
-Install dependencies:
-
-Install OpenJDK, we need to install Java :
-
-```bash
-apt install openjdk-17-jre-headless -y
-```
-<img width="650" alt="Image" src="https://github.com/user-attachments/assets/8f9cd2a4-e543-4c98-8861-4e0abb1db07d" />
-
-We can confirm the version of Java
-
-```bash
-java -version
-```
-<img width="570" alt="Image" src="https://github.com/user-attachments/assets/98323be7-c4d4-44b6-ba2c-82b6e0b8bb3a" />
-
-
-After that, we can download and add the Elasticsearch GPG Key and repository:
+We can download and add the Elasticsearch GPG Key and repository:
 
 ```bash
 curl -fsSL https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
