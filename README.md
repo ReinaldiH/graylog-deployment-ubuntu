@@ -47,7 +47,7 @@ apt install curl wget apt-transport-https
 Graylog requires Java. Install OpenJDK 11:
 
 ```bash
-apt install openjdk-11-jre -y
+apt install openjdk-17-jre -y
 ```
 
 Verify the Java version:
