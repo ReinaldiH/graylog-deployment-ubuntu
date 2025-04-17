@@ -175,7 +175,7 @@ Download and install the Graylog repository:
 
 ```bash
 wget https://packages.graylog2.org/repo/packages/graylog-5.2-repository_latest.deb
-dpkg -i graylog-4.2-repository.deb
+dpkg -i graylog-5.2-repository.deb
 ```
 <img width="646" alt="Image" src="https://github.com/user-attachments/assets/8b21454f-4712-47da-b897-4f42fb32d95c" />
 
